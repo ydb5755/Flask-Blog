@@ -8,7 +8,7 @@ from flaskblog.config import Config
 
 
 db            = SQLAlchemy()
-migrate       = Migrate(db=db)
+migrate       = Migrate()
 bcrypt        = Bcrypt()
 login_manager = LoginManager()
 
@@ -23,7 +23,7 @@ def create_app(config_class=Config):
     app           = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
-    migrate.init_app(app)
+    migrate.init_app(app, db)
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
